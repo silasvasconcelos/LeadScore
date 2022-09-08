@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     # Community apps
     'rest_framework',
+    'drf_yasg',
 
     # Poject apps
     'leads',
