@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Community apps
+    'rest_framework',
+
     # Poject apps
     'leads',
 ]
