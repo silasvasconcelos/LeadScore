@@ -5,6 +5,7 @@ from leads import api_viewsets
 
 router = DefaultRouter()
 router.register(r'agents', api_viewsets.AgentsViewSet, basename="agents")
+router.register(r'leads', api_viewsets.LeadsViewSet, basename="leads")
 
 urlpatterns = [
     path('', include(router.urls)),
