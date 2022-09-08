@@ -6,7 +6,7 @@ from leads import models, serializers
 
 
 class AgentsViewSet(viewsets.ModelViewSet):
-    queryset = models.Lead.objects.all()
+    queryset = models.Agent.objects.all()
     serializer_class = serializers.AgentsSerializer
 
     @swagger_auto_schema(
