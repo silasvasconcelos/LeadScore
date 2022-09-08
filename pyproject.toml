@@ -13,6 +13,8 @@ django-filter = "^22.1"
 django-environ = "^0.9.0"
 
 [tool.poetry.dev-dependencies]
+ipython = "^8.5.0"
+pylint = "^2.15.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
