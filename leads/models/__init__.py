@@ -1,3 +1,4 @@
 from .agent import Agent
+from .lead import Lead
 
-__ALL__ = ['Agent', ]
+__ALL__ = ['Agent', 'Lead', ]
