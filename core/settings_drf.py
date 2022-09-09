@@ -44,6 +44,7 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated",
         "rest_framework.permissions.DjangoModelPermissions",
     ],
+    # TODO: DEFAULT_PAGINATION_CLASS isn't working, check this after
     'DEFAULT_PAGINATION_CLASS': 'core.pagination.PageNumberWithLimitPagination',
     'PAGE_SIZE': 10,
     'DEFAULT_FILTER_BACKENDS': [
