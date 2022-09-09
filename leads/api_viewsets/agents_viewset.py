@@ -1,13 +1,14 @@
-from rest_framework import viewsets
 from drf_yasg.utils import swagger_auto_schema
+from rest_framework import viewsets
 
-
+from core.pagination import PageNumberWithLimitPagination
 from leads import models, serializers
 
 
 class AgentsViewSet(viewsets.ModelViewSet):
     queryset = models.Agent.objects.all()
     serializer_class = serializers.AgentsSerializer
+    pagination_class = PageNumberWithLimitPagination
 
     @swagger_auto_schema(
         operation_description='Listing all agents in the system.',
