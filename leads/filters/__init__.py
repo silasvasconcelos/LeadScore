@@ -1,3 +1,3 @@
-from .leads_filters import LeadsFilters
+from .agents_for_lead_filters import AgentsForLeadFilters
 
-__ALL__ = ['LeadsFilters', ]
+__ALL__ = ['AgentsForLeadFilters', ]
