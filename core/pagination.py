@@ -1,6 +1,6 @@
 from rest_framework.pagination import PageNumberPagination
-from rest_framework.settings import api_settings
 from rest_framework.response import Response
+from rest_framework.settings import api_settings
 
 
 class PageNumberWithLimitPagination(PageNumberPagination):
@@ -9,7 +9,6 @@ class PageNumberWithLimitPagination(PageNumberPagination):
     max_page_size = 100
     total_pages = 0
     per_page = 0
-
 
     def get_paginated_response(self, data):
         return Response({
