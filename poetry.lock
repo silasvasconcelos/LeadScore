@@ -143,6 +143,17 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-cors-headers"
+version = "3.13.0"
+description = "django-cors-headers is a Django application for handling the server headers required for Cross-Origin Resource Sharing (CORS)."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+Django = ">=3.2"
+
+[[package]]
 name = "django-environ"
 version = "0.9.0"
 description = "A package that allows you to utilize 12factor inspired environment variables to configure your Django application."
@@ -674,7 +685,7 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "f3996fdb8fa5d3beace1acb86d4435a2ef64c0c8ff721f9806068c0053ea002e"
+content-hash = "eb003e98e2fd44674ae56ff0fd2c84634e09c5e3f7c6ef54807a685c6e5e2148"
 
 [metadata.files]
 appnope = []
@@ -690,6 +701,7 @@ coreschema = []
 decorator = []
 dill = []
 django = []
+django-cors-headers = []
 django-environ = []
 django-filter = []
 djangorestframework = []
