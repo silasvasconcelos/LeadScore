@@ -1,10 +1,12 @@
+from django_filters.rest_framework import DjangoFilterBackend
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
+from rest_framework.filters import OrderingFilter
 from rest_framework.response import Response
 
 from core.pagination import PageNumberWithLimitPagination
-from leads import models, serializers
+from leads import models, serializers, filters
 
 
 class LeadsViewSet(viewsets.ModelViewSet):
@@ -12,7 +14,27 @@ class LeadsViewSet(viewsets.ModelViewSet):
     queryset_agens = models.Agent.objects.all()
     serializer_class = serializers.LeadsSerializer
     lead_support_serializer = serializers.LeadSupportSerializer
-    pagination_class = PageNumberWithLimitPagination
+    filter_backends = [
+        DjangoFilterBackend,
+        OrderingFilter,
+    ]
+
+    @property
+    def pagination_class(self):
+        if self.action == 'list':
+            return PageNumberWithLimitPagination
+        return None
+
+    @property
+    def filterset_class(self):
+        if self.action in ('agents', 'agents_last_lead',):
+            return filters.AgentsForLeadFilters
+        return None
+
+    def get_queryset(self):
+        if self.action in ('agents', 'agents_last_lead',):
+            return self.queryset_agens
+        return super().get_queryset()
 
     def get_serializer_class(self):
         return {
@@ -83,7 +105,7 @@ class LeadsViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['GET'])
     def agents(self, request, *args, **kwargs):
         lead = self.get_object()
-        agents = self.filter_queryset(self.queryset_agens.lead_score(lead.pk))
+        agents = self.filter_queryset(self.queryset_agens.lead_score(lead.pk)).order_by('-score')
         serializer = self.get_serializer(agents, many=True, context={'lead': lead})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -96,6 +118,6 @@ class LeadsViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['GET'], url_path='agents')
     def agents_last_lead(self, request, *args, **kwargs):
         lead = self.queryset.last()
-        agents = self.filter_queryset(self.queryset_agens.lead_score(lead.pk))
+        agents = self.filter_queryset(self.queryset_agens.lead_score(lead.pk).order_by('-score'))
         serializer = self.get_serializer(agents, many=True, context={'lead': lead})
         return Response(serializer.data, status=status.HTTP_200_OK)
